@@ -1,7 +1,4 @@
 MsitStockManager::Application.routes.draw do
-  resources :suppliers
-
-
   resources :products
 
 

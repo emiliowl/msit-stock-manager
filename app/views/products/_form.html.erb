@@ -1,21 +1,14 @@
-<%= simple_form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for(@product, html: {class: "form_vertical"}) do |f| %>
+  <%= f.error_notification %>
+  <fieldset>
+    <legend>Produto</legend>
+    <div class="form-inputs">
+      <%= f.input :name %>
     </div>
-  <% end %>
+  </fieldset>
 
-  <div class="field">
-    <%= f.input :name %>
-    <%= f.association :suppliers, as: :check_boxes %>
-  </div>
-  <div class="actions">
-    <%= f.button :submit %>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn-primary' %>
+    <%= link_to "Cancel", products_path, type: :reset, class: 'btn btn-danger' %> 
   </div>
 <% end %>
