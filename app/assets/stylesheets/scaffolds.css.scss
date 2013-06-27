@@ -8,17 +8,15 @@ body {
   color: #333;
 }
 
-h1 {
-  font-size: 28px;
-  color: #000; 
-  line-height: 20px;
-}
-
 a  {color: #03c}
 a:hover {
   background-color: #03c;
   color: white;
   text-decoration: none;
+}
+
+ol {
+  padding-left: 25px;
 }
 
 
@@ -116,17 +114,7 @@ a:hover {
   margin-top: 25px;
   padding-top: 15px;
 }
-#getting-started h1 {
-  margin: 0;
-  font-size: 20px;
-}
-#getting-started h2 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: normal;
-  color: #333;
-  margin-bottom: 25px;
-}
+
 #getting-started ol {
   margin-left: 0;
   padding-left: 0;

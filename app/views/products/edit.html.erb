@@ -1,6 +1,6 @@
-<h1>Editing product</h1>
-
+<p>
+<%= cl_image_tag("product#{@product.id}#{@product.updated_at}.png", :alt => "Sample Image",
+                                       :width => 150, :height => 100, 
+                                       :crop => :fill, :radius => '10') %>
+</p>
 <%= render 'form' %>
-
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>

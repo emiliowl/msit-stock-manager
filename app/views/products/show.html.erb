@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<p> 
+  <p>
+    <%= cl_image_tag("product#{@product.id}#{@product.updated_at}.png", :alt => "Sample Image",
+                                   :width => 150, :height => 100, 
+                                   :crop => :fill, :radius => '10') %>
+  </p>
   <b>Name:</b>
   <%= @product.name %>
 </p>

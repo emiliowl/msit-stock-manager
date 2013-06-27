@@ -9,6 +9,10 @@ gem 'sqlite3'
 
 gem 'simple_form'
 
+#image manipulation API
+gem 'carrierwave'
+gem 'cloudinary'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
