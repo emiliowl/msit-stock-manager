@@ -1,3 +1,7 @@
+test: 
+  cloud_name: "msitbrasil"
+  api_key: "224195695462522"
+  api_secret: "VmfK4ppoLRuUO8-__31gIlEbINw"
 development: 
   cloud_name: "msitbrasil"
   api_key: "224195695462522"

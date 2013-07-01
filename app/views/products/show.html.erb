@@ -2,9 +2,7 @@
 
 <p> 
   <p>
-    <%= cl_image_tag("product#{@product.id}#{@product.updated_at}.png", :alt => "Sample Image",
-                                   :width => 150, :height => 100, 
-                                   :crop => :fill, :radius => '10') %>
+    <%= cl_image_tag("#{@product.class.to_s << @product.id.to_s << @product.created_at.to_s}.png", :alt => "Product Image", :version => Time.now.to_i) %>
   </p>
   <b>Name:</b>
   <%= @product.name %>

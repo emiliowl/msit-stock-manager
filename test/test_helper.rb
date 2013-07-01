@@ -9,5 +9,8 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  # Add more helper methods to be used by all tests here...  
+  def get_file
+      File.new('/Users/emiliowl/Projects/git/msit-stock-manager/app/assets/images/rails.png', 'rb')
+  end
 end

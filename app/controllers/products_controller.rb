@@ -1,9 +1,15 @@
-class ProductsController < ApplicationController
+class ProductsController < ApplicationController         
+  
+  before_filter :initialize_image_repository, :only => [:create, :update, :destroy]
+  
+  def initialize_image_repository
+    @repository = Repository::ImageRepository.new
+  end
+  
   # GET /products
   # GET /products.json
   def index
     @products = Product.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
@@ -43,11 +49,10 @@ class ProductsController < ApplicationController
     @product = Product.new(params[:product].reject{|item|item == "image"})
     
     respond_to do |format|
-      if @product.save
-        Cloudinary::Uploader.upload(params[:product][:image], 
-                                    :public_id => "product#{@product.id}#{@product.created_at}",
-                                    :width => 150, :height => 100, 
-                                    :crop => :fill, :format => 'png') if params[:product][:image]
+      if @product.save                         
+        logger.info "start creation of image: #{Time.now}"
+        @repository.save_or_update(@product, params[:product][:image]) if params[:product][:image]
+        logger.info "end creation of image: #{Time.now}"
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -64,10 +69,9 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update_attributes(params[:product].reject{|item|item == "image"}) 
-        Cloudinary::Uploader.upload(params[:product][:image], 
-                                    :public_id => "product#{@product.id}#{@product.created_at}",
-                                    :width => 150, :height => 100, 
-                                    :crop => :fill, :format => 'png') if params[:product][:image]
+        logger.info "start creation of image: #{Time.now}"
+        @repository.save_or_update(@product, params[:product][:image]) if params[:product][:image]   
+        logger.info "end creation of image: #{Time.now}"     
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
@@ -80,11 +84,11 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product = Product.find(params[:id])
+    @product = Product.find(params[:id])  
+    logger.info "start destroying image: #{Time.now}"     
+    @repository.destroy_from_model @product                      
+    logger.info "end destroying image: #{Time.now}"     
     @product.destroy
-
-    Cloudinary::Uploader.destroy("product#{@product.id}#{@product.created_at}")
-
     respond_to do |format|
       format.html { redirect_to products_url }
       format.json { head :no_content }
